@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import "./styles/fonts.css"
-import Navbar from './components/Navbar/indes';
+import Navbar from './components/Navbar';
 import MainContent from './components/MainContent';
 
 const App: React.FC = () => {
   return (
-    <Main>
-      <Navbar />
-      <MainContent />
-    </Main>
+      <Main>
+        <Navbar />
+        <MainContent />
+      </Main>
   );
 }
 

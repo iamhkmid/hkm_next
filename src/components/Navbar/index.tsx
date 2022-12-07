@@ -1,9 +1,9 @@
 import React, { useState } from "react"
+import { TReactFC } from "../../types"
 import styled from "styled-components"
-import { TTheme } from "../../types"
 import { motion } from "framer-motion";
 
-const Navbar = () => {
+const Navbar: React.FC<TReactFC> = () => {
   const [selected, setSelected] = useState<number>(1)
   return (
     <Main>
@@ -52,14 +52,13 @@ const menuList = [
   }
 ]
 
-type TMain = { theme: TTheme }
-
-const Main = styled.div<TMain>`
+const Main = styled.div`
   display: flex;
   position: fixed;
   width: 100%;
   justify-content: space-between;
   min-height: 60px;
+  z-index: 100;
   > div.logo {
     display: flex;
     align-items: center;
@@ -68,7 +67,7 @@ const Main = styled.div<TMain>`
     font-size: 15px;
     font-weight: 600;
     width: fit-content;
-    color: ${({ theme }) => theme.colors.blueGrey[100]};
+    color: ${({ theme }) => theme.colors.blue?.["01"]};
     > div {
       display: flex;
       align-items: center;
@@ -78,7 +77,7 @@ const Main = styled.div<TMain>`
       border-radius: 100%;
       font-size: 16px;
       font-weight: 700;
-      background: ${({ theme }) => theme.colors.teal[600]};
+      background: ${({ theme }) => theme.colors.blue?.["06"]};
     }
   }
   > ul.menu-list {
@@ -93,27 +92,28 @@ const Main = styled.div<TMain>`
       float: left;
       text-align: center;
       cursor: pointer;
+      color: ${({ theme }) => theme.colors.blue?.["01"]};
       position: relative;
       padding: 5px 10px;
-      border-bottom: 2px solid transparent;
+      border-radius: 2px;
       > div.selected-menu {
         position: absolute;
         left: 0;
-        top: 0;
+        bottom: -2px;
         width: 100%;
-        height: 100%;
+        height: 2px;
         border-radius: 2px;
-        background: ${({ theme }) => theme.colors.teal[700]};
+        background: ${({ theme }) => theme.colors.primary?.default};
         z-index: -1;
         transition: background ease 0.3s;
       }
       :hover {
-        border-bottom: 2px solid ${({ theme }) => theme.colors.teal[700]};
+          background: ${({ theme }) => theme.colors.gray?.["10"]};
         > div.selected-menu {
-          background: ${({ theme }) => theme.colors.teal[600]};
+          background: ${({ theme }) => theme.colors.blue?.["06"]};
         }
       }
-      transition: border-bottom ease 0.3s;
+      transition: background ease 0.3s;
     }
   }
 `;

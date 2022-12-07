@@ -1,15 +1,12 @@
 import React from "react"
 import styled from "styled-components"
+import Section1 from "./Section1"
+import Section2 from "./Section2"
 
 const MainContent: React.FC = () => {
   return (
     <Main>
-      <div className="content">
-        <div className="greeting">
-          <p>HI THERE I'M</p>
-          <p>MUHAMMAD LUQMANUL HAKIM</p>
-        </div>
-      </div>
+      <Section1 />
     </Main>
   )
 }
@@ -18,10 +15,6 @@ export default MainContent
 
 const Main = styled.div`
   display: flex;
-  min-height: 100vh;
-  > div.content {
-    display: flex;
-    padding: 60px;
-  }
+  flex-direction: column;
 `
 
