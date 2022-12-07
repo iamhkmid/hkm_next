@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import {ReactComponent as ProfileImg } from "../../assets/img/profile-optimize.svg"
+import { ReactComponent as ProfileImg } from "../../assets/img/profile-optimize.svg"
 
-const Section1 = () => {
+const Home: React.FC = () => {
   return (
     <Main>
       <div>
@@ -10,16 +10,14 @@ const Section1 = () => {
           <ProfileImg />
         </div>
         <div className="greeting">
-          <p>HI THERE I'M</p>
-          <p>MUHAMMAD LUQMANUL HAKIM</p>
-          <p>A Front-End Developer </p>
+          <p>Hi there I'm <span className="name">Muhammad Luqmanul Hakim</span>, Front-end Developer based in Indonesia.</p>
         </div>
       </div>
     </Main>
   )
 }
 
-export default Section1
+export default Home
 
 const Main = styled.div`
   display: flex;
@@ -41,11 +39,17 @@ const Main = styled.div`
       z-index: 1;
       gap: 10px;
       > p:nth-child(1) {
-        font-size: 18px;
-        font-weight: 500;
+        font-size: 22px;
+        font-weight: 300;
         margin: 0;
-        line-height: 1;
+        line-height: 1.5;
+        width: 450px;
         color: ${({ theme }) => theme.colors.blue?.["01"]};
+        > span.name {
+          font-size: 20px;
+          font-weight: 600;
+          color: ${({ theme }) => theme.colors.blue?.["05"]};
+        }
       }
       > p:nth-child(2) {
         font-size: 40px;
