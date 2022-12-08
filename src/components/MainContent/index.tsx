@@ -1,12 +1,13 @@
 import React from "react"
 import styled from "styled-components"
 import Home from "./Home"
-import Section2 from "./Section2"
+import Projects from "./Projects"
 
 const MainContent: React.FC = () => {
   return (
     <Main>
       <Home />
+      <Projects />
     </Main>
   )
 }

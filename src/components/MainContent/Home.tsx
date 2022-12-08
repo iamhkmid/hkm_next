@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProfileImg from "../../assets/img/Profile"
+import { AnimationProps, motion, Variants } from "framer-motion"
 
 const Home: React.FC = () => {
   const message = "'TTheme' is defined but never used"
   const [text, setText] = useState<string[]>([])
 
   const typeWriter = () => {
-    const dataText = ["'TTheme' is defined but never used"];
+    const dataText = ["Typing Text Effects"];
     const typeWriter = (text: string, i: number, fnCallback: () => void) => {
 
       if (i < (text.length)) {
-        document.querySelector("h1")!.innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
+        document.querySelector(".text-typing")!.innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
         setTimeout(() => {
           typeWriter(text, i + 1, fnCallback)
         }, 100);
@@ -39,20 +40,36 @@ const Home: React.FC = () => {
     typeWriter()
   }, [])
 
+  const container: Variants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        ease: "easeIn", duration: 0.4, delay: 0.1
+      }
+    }
+  };
+
   return (
     <Main>
       <div className="content">
         <div className="image">
           <ProfileImg />
         </div>
-        <div className="greeting">
+        <motion.div
+          className="greeting"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
           <p>Hi there I'm <span className="name">Muhammad Luqmanul Hakim</span>, Front-end Developer based in Yogyakarta, Indonesia. Passionate about building interactive and user friendly web application.</p>
-        </div>
+        </motion.div>
       </div>
       <h1 className="text-typing">
         'TTheme' is defined but never used
       </h1>
-    </Main>
+    </Main >
   )
 }
 
@@ -125,10 +142,11 @@ const Main = styled.div`
   >h1.text-typing {
     position: absolute;
     bottom: 30px;
+    left: 40%;
     margin: 0;
     line-height: 1;
-    font-size: 35px;
-    font-weight: 400;
+    font-size: 60px;
+    font-weight: 700;
     margin: 0;
     span {
       border-right: 2px solid;
