@@ -1,18 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as ProfileImg } from "../../assets/img/profile-optimize.svg"
+import ProfileImg from "../../assets/img/Profile"
 
 const Home: React.FC = () => {
+  const message = "'TTheme' is defined but never used"
+  const [text, setText] = useState<string[]>([])
+
+  const typeWriter = () => {
+    const dataText = ["'TTheme' is defined but never used"];
+    const typeWriter = (text: string, i: number, fnCallback: () => void) => {
+
+      if (i < (text.length)) {
+        document.querySelector("h1")!.innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
+        setTimeout(() => {
+          typeWriter(text, i + 1, fnCallback)
+        }, 100);
+      }
+      else if (typeof fnCallback == 'function') {
+        setTimeout(fnCallback, 700);
+      }
+    }
+    const StartTextAnimation = (i: number) => {
+      if (typeof dataText[i] == 'undefined') {
+        setTimeout(() => {
+          StartTextAnimation(0);
+        }, 20000);
+      }
+      if (i < dataText[i].length) {
+        typeWriter(dataText[i], 0, () => {
+          StartTextAnimation(i + 1);
+        });
+      }
+    }
+    StartTextAnimation(0);
+  }
+
+  useEffect(() => {
+    typeWriter()
+  }, [])
+
   return (
     <Main>
-      <div>
+      <div className="content">
         <div className="image">
           <ProfileImg />
         </div>
         <div className="greeting">
-          <p>Hi there I'm <span className="name">Muhammad Luqmanul Hakim</span>, Front-end Developer based in Indonesia.</p>
+          <p>Hi there I'm <span className="name">Muhammad Luqmanul Hakim</span>, Front-end Developer based in Yogyakarta, Indonesia. Passionate about building interactive and user friendly web application.</p>
         </div>
       </div>
+      <h1 className="text-typing">
+        'TTheme' is defined but never used
+      </h1>
     </Main>
   )
 }
@@ -21,14 +60,17 @@ export default Home
 
 const Main = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   overflow: hidden;
+  position: relative;
   background: ${({ theme }) => theme.colors.background["01"]};
-  > div {
+  > div.content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 100%;
     padding: 60px 80px 0 80px;
     justify-content: space-between;
     > div.greeting {
@@ -43,7 +85,7 @@ const Main = styled.div`
         font-weight: 300;
         margin: 0;
         line-height: 1.5;
-        width: 450px;
+        width: 600px;
         color: ${({ theme }) => theme.colors.blue?.["01"]};
         > span.name {
           font-size: 20px;
@@ -62,13 +104,35 @@ const Main = styled.div`
     > div.image {
       display: flex;
       position: relative;
+      height: 100%;
+      width: 100%;
       > svg {
         position: absolute;
-        bottom: -60px;
-        left: 0;
+        top: 0;
+        left: -90px;
+        bottom: 0;
+        margin: auto 0;
         height: 800px;
         width: 800px;
       }
+    }
+  }
+  @keyframes caret {
+    50% {
+      border-color: transparent;
+    }
+  }
+  >h1.text-typing {
+    position: absolute;
+    bottom: 30px;
+    margin: 0;
+    line-height: 1;
+    font-size: 35px;
+    font-weight: 400;
+    margin: 0;
+    span {
+      border-right: 2px solid;
+      animation: caret 1s steps(1) infinite;
     }
   }
 `

@@ -10,7 +10,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif; 
     background-color: ${({ theme }) => theme.colors.background["01"]};
     
     /* width */
@@ -18,7 +18,7 @@ export default createGlobalStyle`
       width: 10px;
       height: 10px;
     }
-    color: ${({ theme }) => theme.colors.primary?.default};
+    color: ${({ theme }) => theme.colors.blue?.["01"]};
 
     /* Track */
     ::-webkit-scrollbar-track {
